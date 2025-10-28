@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCalc</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(230, 230, 230);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: green;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    section {
+      background: white;
+      margin: 25px auto;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h2 {
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    p {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 8px;
+      width: 80%;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      background: green;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: darkgreen;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: darkgreen;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      border-top: 3px solid green;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #4CAF50;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SmartCalc</h1>
+    <p>Calculate, learn, and grow smarter every day.</p>
+  </header>
+
+  <!-- BMI CALCULATOR -->
+  <section>
+    <h2>BMI Calculator</h2>
+    <p>Enter your weight (kg) and height (m) to calculate your BMI.</p>
+    <input type="number" id="weight" placeholder="Weight (kg)" />
+    <input type="number" id="height" placeholder="Height (m)" step="0.01" />
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p id="bmi-result"></p>
+  </section>
+
+  <!-- GPA CALCULATOR -->
+  <section>
+    <h2>GPA Calculator</h2>
+    <p>Enter your grades and credit hours to calculate your GPA.</p>
+    <input type="number" id="grade1" placeholder="Grade 1" />
+    <input type="number" id="credits1" placeholder="Credits 1" />
+    <input type="number" id="grade2" placeholder="Grade 2" />
+    <input type="number" id="credits2" placeholder="Credits 2" />
+    <input type="number" id="grade3" placeholder="Grade 3" />
+    <input type="number" id="credits3" placeholder="Credits 3" />
+    <button onclick="calculateGPA()">Calculate GPA</button>
+    <p id="gpa-result"></p>
+  </section>
+
+  <!-- LOAN/EMI CALCULATOR -->
+  <section>
+    <h2>Loan/EMI Calculator</h2>
+    <p>Enter your loan amount, interest rate, and period to calculate EMI.</p>
+    <input type="number" id="loan-amount" placeholder="Loan Amount" />
+    <input type="number" id="interest-rate" placeholder="Annual Interest Rate (%)" />
+    <input type="number" id="tenure" placeholder="Tenure (Months)" />
+    <button onclick="calculateEMI()">Calculate EMI</button>
+    <p id="emi-result"></p>
+  </section>
+
+  <!-- PERCENTAGE CALCULATOR -->
+  <section>
+    <h2>Percentage Calculator</h2>
+    <p>Enter the total marks and obtained marks to calculate your percentage.</p>
+    <input type="number" id="total-marks" placeholder="Total Marks" />
+    <input type="number" id="obtained-marks" placeholder="Obtained Marks" />
+    <button onclick="calculatePercentage()">Calculate Percentage</button>
+    <p id="percentage-result"></p>
+  </section>
+
+  <!-- AGE CALCULATOR -->
+  <section>
+    <h2>Age Calculator</h2>
+    <p>Enter your date of birth to calculate your exact age.</p>
+    <input type="date" id="dob" />
+    <button onclick="calculateAge()">Calculate Age</button>
+    <p id="age-result"></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 SmartCalc. All rights reserved.</p>
+    <p>
+      <a href="#">Home</a> |
+      <a href="https://emmanuel002332.github.io">Contact</a> |
+      <a href="#">About</a>
+    </p>
+    <p>SmartCalc – Fast, easy, and reliable calculators for students and professionals.</p>
+  </footer>
+
+  <script>
+    // BMI CALCULATOR
+    function calculateBMI() {
+      let weight = parseFloat(document.getElementById('weight').value);
+      let height = parseFloat(document.getElementById('height').value);
+      if (!weight || !height) {
+        alert("Please enter valid weight and height!");
+        return;
+      }
+      let bmi = weight / (height * height);
+      let category = "";
+      if (bmi < 18.5) category = "Underweight";
+      else if (bmi < 25) category = "Normal weight";
+      else if (bmi < 30) category = "Overweight";
+      else category = "Obese";
+      document.getElementById('bmi-result').innerText = `Your BMI is ${bmi.toFixed(2)} (${category})`;
+    }
+
+    // GPA CALCULATOR
+    function calculateGPA() {
+      let grades = [
+        parseFloat(document.getElementById('grade1').value),
+        parseFloat(document.getElementById('grade2').value),
+        parseFloat(document.getElementById('grade3').value)
+      ];
+      let credits = [
+        parseFloat(document.getElementById('credits1').value),
+        parseFloat(document.getElementById('credits2').value),
+        parseFloat(document.getElementById('credits3').value)
+      ];
+
+      if (grades.includes(NaN) || credits.includes(NaN)) {
+        alert("Please enter valid grades and credits!");
+        return;
+      }
+
+      let totalPoints = 0, totalCredits = 0;
+      for (let i = 0; i < grades.length; i++) {
+        totalPoints += grades[i] * credits[i];
+        totalCredits += credits[i];
+      }
+      let gpa = totalPoints / totalCredits;
+      document.getElementById('gpa-result').innerText = `Your GPA is ${gpa.toFixed(2)}`;
+    }
+
+    // LOAN/EMI CALCULATOR
+    function calculateEMI() {
+      let principal = parseFloat(document.getElementById('loan-amount').value);
+      let annualRate = parseFloat(document.getElementById('interest-rate').value);
+      let months = parseInt(document.getElementById('tenure').value);
+
+      if (!principal || !annualRate || !months) {
+        alert("Please enter valid loan details!");
+        return;
+      }
+
+      let monthlyRate = annualRate / 12 / 100;
+      let emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                (Math.pow(1 + monthlyRate, months) - 1);
+      let totalPayment = emi * months;
+      let totalInterest = totalPayment - principal;
+
+      document.getElementById('emi-result').innerText =
+        `EMI: ₦${emi.toFixed(2)} | Total Payment: ₦${totalPayment.toFixed(2)} | Interest: ₦${totalInterest.toFixed(2)}`;
+    }
+
+    // PERCENTAGE CALCULATOR
+    function calculatePercentage() {
+      let total = parseFloat(document.getElementById('total-marks').value);
+      let obtained = parseFloat(document.getElementById('obtained-marks').value);
+
+      if (!total || !obtained) {
+        alert("Please enter valid marks!");
+        return;
+      }
+
+      let percentage = (obtained / total) * 100;
+      document.getElementById('percentage-result').innerText = `Percentage: ${percentage.toFixed(2)}%`;
+    }
+
+    // AGE CALCULATOR
+    function calculateAge() {
+      let dob = new Date(document.getElementById('dob').value);
+      if (dob == "Invalid Date") {
+        alert("Please enter a valid date!");
+        return;
+      }
+      let today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      let m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      document.getElementById('age-result').innerText = `You are ${age} years old.`;
+    }
+  </script>
+</body>
+</html>
